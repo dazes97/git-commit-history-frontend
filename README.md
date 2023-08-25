@@ -36,6 +36,17 @@ This frontend project has been developed using modern web development technologi
 
 5. Explore and enjoy the commit history!
 
+## Installation Instructions
+
+1. clone the repository
+2. create a .env file, copy the variables in .env.example 
+3. set values:
+- VITE_DEFAULT_PORT=3000
+- VITE_API_BASE_URL=http://localhost
+- VITE_API_PORT=5000 || (the one choose in the backend port)
+4. run "npm install"
+5. run "npm run dev"
+6. enjoy!
 
 ## Notes
 Private keys and env files are going to be sent by email. For professional purposes I can't commit private keys
