@@ -1,5 +1,14 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MainPage, NotFound } from "./pages";
 function App() {
-  return <p>Initial Setup Project</p>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" Component={MainPage} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
