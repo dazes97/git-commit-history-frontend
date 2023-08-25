@@ -1,2 +1,3 @@
 import MainPage from "./main";
-export {MainPage}
+import NotFound from "./notFound";
+export { MainPage, NotFound };

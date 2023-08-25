@@ -1,2 +1,2 @@
 import CommitElement from "./commitElement";
-export { CommitElement }
+export { CommitElement };

@@ -11,11 +11,17 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import useFetchData from "./hooks/useFetchData";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 const MainPage = () => {
-  const [repoSelected, setRepoSelected] = useState<string>(selectRepository[0]);
-  const [branchSelected, setBranchSelected] = useState<string>(selectBranches[0]);
-  const { commitsData, error, loading } = useFetchData({ repoSelected, branchSelected })
-  const handleSelectRepoChange = (value: string) => setRepoSelected(value);
+  const [repositorySelected, setRepositorySelected] = useState<string>("");
+  const [branchSelected, setBranchSelected] = useState<string>("");
+  const { commitsData, error, loading } = useFetchData({
+    repositorySelected,
+    branchSelected,
+  });
+  const handleSelectRepositoryChange = (value: string) =>
+    setRepositorySelected(value);
   const handleSelectBranchChange = (value: string) => setBranchSelected(value);
   return (
     <Container maxWidth="sm" sx={{ py: 5 }}>
@@ -33,9 +39,9 @@ const MainPage = () => {
               labelId="commit-select-label"
               id="commit-select-id"
               label="Age"
-              value={repoSelected}
+              value={repositorySelected}
               onChange={({ target: { value } }) =>
-                handleSelectRepoChange(value)
+                handleSelectRepositoryChange(value)
               }
             >
               {selectRepository.map((element, index) => {
@@ -75,19 +81,28 @@ const MainPage = () => {
             </FormHelperText>
           </FormControl>
         </Grid>
-        {!loading && error &&
+        {!loading && error && (
           <Grid item xs={12}>
-            <Typography>ERROR.....</Typography>
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              Error while fetching data...<strong>Try again!</strong>
+            </Alert>
           </Grid>
-        }
-        {loading &&
+        )}
+        {loading && (
           <Grid item xs={12}>
-            {[30, 100, 20].map((e) => <Skeleton variant="text" animation="wave" width={500} height={e}></Skeleton>
-            )}
+            {[30, 100, 20].map((e, index) => (
+              <Skeleton
+                key={index}
+                variant="text"
+                animation="wave"
+                sx={{ height: e, width: "100%" }}
+              ></Skeleton>
+            ))}
           </Grid>
-        }
-        {!loading && !error && commitsData &&
-          commitsData.map((e: ICommitData, index) => (
+        )}
+        {!loading &&
+          commitsData?.map((e: ICommitData, index) => (
             <Grid item xs={12} key={index}>
               <CommitElement commit={e.commit} nodeId={e.nodeId} />
             </Grid>
