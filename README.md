@@ -43,13 +43,12 @@ This frontend project has been developed using modern web development technologi
 3. set values:
 - VITE_DEFAULT_PORT=3000
 - VITE_API_BASE_URL=http://localhost
-- VITE_API_PORT=5000 || (the one choose in the backend port)
-4. run "npm install"
-5. run "npm run dev"
+- VITE_API_PORT=5000
+4. run `docker build -t [example-name] .` don't forget to replace "[]" with the name you choose
+5. run `docker run --name=[example-name] -p 3000:3000 [example-name]` 
 6. enjoy!
 
 ## Notes
-Private keys and env files are going to be sent by email. For professional purposes I can't commit private keys
-
+make sure to create a .env file before using docker
 ## Author
 This project was crafted by dazes97. If you have any questions or suggestions, please don't hesitate to get in touch.
